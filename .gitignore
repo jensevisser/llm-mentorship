@@ -1,0 +1,24 @@
+# --- Python basis & cache ---
+__pycache__/
+*.py[cod]
+*.so
+.Python
+
+# --- Virtuele omgeving & Packages ---
+.venv/
+.cache/
+build/
+dist/
+*.egg-info/
+
+# --- Geheimen & Configuratie ---
+.env
+
+# --- Jupyter Notebooks & Data ---
+.ipynb_checkpoints/
+data/
+
+# --- Systeem rommel (voor het geval dat) ---
+.DS_Store
+*.swp
+*.pyc
