@@ -4,16 +4,22 @@ Leertraject richting AI/LLM Engineer — Fase 0: fundamentele Ollama HTTP-client
 
 ## Setup
 
-uv sync
+```bash
+   uv sync
+```
 
 Maak een bestand aan in de root van het project met de naam: .env
-Deze moeten de items bevatten, zoals in het bestand: .env.example
+Dit bestand moet dezelfde variabelen bevatten als: .env.example
 
 ## Gebruik
 
 In de root van de project map gaan staan in de Konsole.
 
-Daarna: uv run src/ollama_client.py
+Daarna:
+
+```bash
+    uv run src/ollama_client.py
+```
 
 ## Bekende Foutmodi
 
