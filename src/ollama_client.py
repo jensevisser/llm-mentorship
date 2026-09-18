@@ -2,11 +2,17 @@ import requests
 import json
 from dotenv import load_dotenv
 import os
+import logging
+
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s, %(levelname)s, %(message)s"
+)
 
 load_dotenv()
 OLLAMA_URL = os.getenv("OLLAMA_URL")
 
 if OLLAMA_URL is None:
+    logging.critical("OLLAMA_URL ontbreekt in .env-bestand")
     raise ValueError("OLLAMA_URL ontbreekt in .env-bestand")
 
 
@@ -23,11 +29,11 @@ def generate(
         return data
 
     except requests.exceptions.ConnectionError as e:
-        print(f" We kunnen geen verbinding krijgen met de Ollama Server: {e}")
+        logging.error(f" We kunnen geen verbinding krijgen met de Ollama Server: {e}")
         return None
 
     except requests.exceptions.HTTPError as e:
-        print(f"De server is bereikt, maar deze geeft een foutcode: {e}")
+        logging.error(f"De server is bereikt, maar deze geeft een foutcode: {e}")
         return None
 
 
@@ -45,15 +51,15 @@ def generate_stream(prompt: str, model: str = "qwen3:14b") -> str | None:
         return full_response
 
     except requests.exceptions.ConnectionError as e:
-        print(f"We kunnen geen verbinding krijgen met de Ollama Server: {e}")
+        logging.error(f"We kunnen geen verbinding krijgen met de Ollama Server: {e}")
         return None
 
     except requests.exceptions.HTTPError as e:
-        print(f"De server is bereikt, maar deze geeft een foutcode: {e}")
+        logging.error(f"De server is bereikt, maar deze geeft een foutcode: {e}")
         return None
 
     except json.JSONDecodeError as e:
-        print(
+        logging.error(
             f"De stream is onderbroken. Er is al wel wat binnen gekomen, maar niet afgemaakt. \nDatgene wat we binnen hebben word teruggegeven. foutcode: {e}"
         )
         return full_response
